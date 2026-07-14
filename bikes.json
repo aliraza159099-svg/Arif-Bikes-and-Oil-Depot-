@@ -1,5 +1,5 @@
 [
-  { "name": "Honda CD 70", "cc": "70cc", "price": "Rs. 1,35,000", "image": "honda-cd70.jpg" },
+  { "name": "Honda CD 70", "cc": "70cc", "price": "Rs. 1,35,000", "image": "Bike1.png" },
   { "name": "Honda CG 125", "cc": "125cc", "price": "Rs. 2,45,000", "image": "honda-cg125.jpg" },
   { "name": "Yamaha YBR 125", "cc": "125cc", "price": "Rs. 3,10,000", "image": "yamaha-ybr125.jpg" },
   { "name": "United US 70", "cc": "70cc", "price": "Rs. 1,10,000", "image": "united-us70.jpg" },
