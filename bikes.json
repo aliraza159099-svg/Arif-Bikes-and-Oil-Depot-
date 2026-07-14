@@ -6,12 +6,6 @@
     "image": "Bike1.png"
   },
   {
-    "name": "Honda CG 125",
-    "cc": "125cc",
-    "price": "Rs. 2,45,000",
-    "image": "bike2.jpg"
-  },
-  {
     "name": "Honda 2025 Model",
     "cc": "125",
     "price": "215000",
