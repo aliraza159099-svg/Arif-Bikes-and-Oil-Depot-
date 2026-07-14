@@ -10,5 +10,11 @@
     "cc": "125 CC",
     "price": "115000",
     "image": "honda-2011-model-1784037100928.jpg"
+  },
+  {
+    "name": "Honda 2022",
+    "cc": "125 CC",
+    "price": "165000",
+    "image": "honda-2022-1784037696569.jpg"
   }
 ]
