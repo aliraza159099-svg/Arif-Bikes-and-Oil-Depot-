@@ -1,0 +1,1 @@
+Put your bike photos in this folder (e.g. honda-cd70.jpg), then reference them in js/bikes-data.js

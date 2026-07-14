@@ -1,0 +1,741 @@
+/* =========================================================
+   ARIF BIKES AND OIL DEPU — stylesheet
+   Design idea: hand-painted roadside signboard + fuel pump.
+   Colors, fonts and spacing are all defined once below as
+   CSS variables — change them here and the whole site updates.
+   ========================================================= */
+
+:root{
+  /* --- Color tokens --- */
+  --asphalt:      #17171A;   /* near-black, used for dark sections */
+  --asphalt-2:    #232326;   /* slightly lighter dark, for cards on dark bg */
+  --paper:        #EFE7D8;   /* warm cream page background */
+  --paper-2:      #E4D9C4;   /* slightly deeper cream, for cards on light bg */
+  --signal-red:   #C81E3A;   /* brand / petrol tag / primary CTA */
+  --pump-yellow:  #F4B400;   /* hazard stripe / accents */
+  --diesel-green: #1F4D3A;   /* diesel tag */
+  --chrome:       #8A94A6;   /* muted steel grey for secondary text */
+  --ink:          #1B1B1B;   /* main text on light bg */
+  --cream-text:   #F4EFE4;   /* main text on dark bg */
+
+  /* --- Type tokens --- */
+  --font-display: 'Anton', sans-serif;
+  --font-body:    'Work Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --radius: 6px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:var(--font-body);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(200,30,58,.05), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(244,180,0,.07), transparent 45%),
+    var(--paper);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Themed scrollbar */
+::-webkit-scrollbar{ width:12px; }
+::-webkit-scrollbar-track{ background:var(--paper); }
+::-webkit-scrollbar-thumb{
+  background:var(--asphalt);
+  border-radius:10px;
+  border:3px solid var(--paper);
+}
+::-webkit-scrollbar-thumb:hover{ background:var(--signal-red); }
+
+::selection{ background:var(--pump-yellow); color:var(--ink); }
+
+img{ max-width:100%; display:block; }
+
+a{ color:inherit; text-decoration:none; }
+
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+/* -------------------- Hazard stripe divider (signature element) -------------------- */
+.hazard{
+  height:14px;
+  background:repeating-linear-gradient(
+    45deg,
+    var(--asphalt),
+    var(--asphalt) 16px,
+    var(--pump-yellow) 16px,
+    var(--pump-yellow) 32px
+  );
+  background-size:200% 200%;
+  animation:hazard-march 6s linear infinite;
+  box-shadow:0 0 10px rgba(0,0,0,.25) inset;
+}
+@keyframes hazard-march{
+  from{ background-position:0 0; }
+  to{ background-position:90px 0; }
+}
+
+/* -------------------- Header / nav -------------------- */
+header.site-header{
+  background:var(--asphalt);
+  color:var(--cream-text);
+  position:sticky;
+  top:0;
+  z-index:50;
+  border-bottom:4px solid var(--pump-yellow);
+  box-shadow:0 4px 18px rgba(0,0,0,.35);
+}
+
+.brand{ transition:transform .2s ease; }
+.brand:hover{ transform:scale(1.03); }
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 20px;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.brand{
+  font-family:var(--font-display);
+  font-size:1.4rem;
+  letter-spacing:0.5px;
+  color:var(--cream-text);
+  text-transform:uppercase;
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+.brand small{
+  font-family:var(--font-mono);
+  font-size:0.6rem;
+  color:var(--pump-yellow);
+  letter-spacing:2px;
+  margin-top:2px;
+}
+
+nav.main-nav{
+  display:flex;
+  gap:26px;
+}
+nav.main-nav a{
+  font-family:var(--font-mono);
+  font-size:0.85rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--cream-text);
+  padding:6px 0;
+  position:relative;
+  transition:color .2s ease;
+}
+nav.main-nav a::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:-2px;
+  width:100%;
+  height:2px;
+  background:var(--pump-yellow);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .25s ease;
+}
+nav.main-nav a:hover,
+nav.main-nav a.active{
+  color:var(--pump-yellow);
+}
+nav.main-nav a:hover::after,
+nav.main-nav a.active::after{
+  transform:scaleX(1);
+}
+
+.nav-toggle{
+  display:none;
+  background:none;
+  border:2px solid var(--cream-text);
+  color:var(--cream-text);
+  font-family:var(--font-mono);
+  font-size:0.8rem;
+  padding:6px 10px;
+  border-radius:var(--radius);
+}
+
+@media (max-width:720px){
+  nav.main-nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+    background:var(--asphalt);
+    flex-direction:column;
+    gap:0;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+    border-bottom:4px solid var(--pump-yellow);
+  }
+  nav.main-nav.open{ max-height:300px; }
+  nav.main-nav a{
+    padding:14px 20px;
+    border-bottom:1px solid #333;
+  }
+  .nav-toggle{ display:block; }
+}
+
+/* -------------------- Hero (signboard) -------------------- */
+.hero{
+  background:
+    radial-gradient(circle at 15% 20%, rgba(244,180,0,.12), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(200,30,58,.15), transparent 45%),
+    var(--asphalt);
+  color:var(--cream-text);
+  padding:64px 0 56px;
+  position:relative;
+  overflow:hidden;
+}
+/* faint road-line texture across the hero */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(
+    90deg, transparent, transparent 58px,
+    rgba(244,239,228,.05) 58px, rgba(244,239,228,.05) 62px
+  );
+  pointer-events:none;
+}
+
+.signboard{
+  border:4px solid var(--pump-yellow);
+  border-radius:10px;
+  padding:40px 30px;
+  position:relative;
+  background:var(--asphalt-2);
+  box-shadow:
+    0 10px 0 rgba(0,0,0,.35),
+    0 25px 50px -12px rgba(0,0,0,.6),
+    0 0 40px rgba(244,180,0,.08);
+  animation:sign-in .6s ease both;
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.signboard:hover{
+  transform:translateY(-3px) rotate(-0.3deg);
+  box-shadow:
+    0 12px 0 rgba(0,0,0,.35),
+    0 30px 55px -12px rgba(0,0,0,.65),
+    0 0 55px rgba(244,180,0,.16);
+}
+@keyframes sign-in{
+  from{ opacity:0; transform:translateY(16px) scale(.98); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+/* rivets in the corners, like a bolted metal sign */
+.signboard::before,
+.signboard::after{
+  content:"";
+  position:absolute;
+  width:10px; height:10px;
+  border-radius:50%;
+  background:var(--pump-yellow);
+  top:14px; left:14px;
+  box-shadow:0 0 8px rgba(244,180,0,.7);
+}
+.signboard::after{ left:auto; right:14px; }
+
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.4rem, 6vw, 4.2rem);
+  text-transform:uppercase;
+  line-height:1;
+  letter-spacing:1px;
+}
+.hero h1 span{ color:var(--pump-yellow); }
+
+.hero .tagline{
+  font-family:var(--font-mono);
+  color:var(--chrome);
+  margin-top:14px;
+  font-size:1rem;
+  letter-spacing:1px;
+}
+
+.hero .location{
+  margin-top:6px;
+  font-family:var(--font-mono);
+  font-size:0.85rem;
+  color:var(--cream-text);
+}
+
+.cta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:28px;
+}
+
+.btn{
+  font-family:var(--font-mono);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:0.85rem;
+  padding:14px 22px;
+  border-radius:var(--radius);
+  border:2px solid transparent;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn::before{
+  content:"";
+  position:absolute;
+  top:0; left:-75%;
+  width:50%; height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.4), transparent);
+  transform:skewX(-20deg);
+  transition:left .5s ease;
+}
+.btn:hover::before{ left:125%; }
+.btn:hover{ transform:translateY(-3px); }
+.btn:active{ transform:translateY(-1px); }
+
+.btn-primary{
+  background:linear-gradient(135deg, var(--signal-red), #9c1730);
+  color:#fff;
+  box-shadow:0 6px 16px -4px rgba(200,30,58,.55);
+}
+.btn-primary:hover{ box-shadow:0 10px 22px -4px rgba(200,30,58,.7); }
+
+.btn-whatsapp{
+  background:linear-gradient(135deg, #2fe07a, #1eae5c);
+  color:#04331b;
+  box-shadow:0 6px 16px -4px rgba(37,211,102,.55);
+}
+.btn-whatsapp:hover{ box-shadow:0 10px 22px -4px rgba(37,211,102,.7); }
+
+.btn-outline{
+  background:transparent;
+  border-color:var(--cream-text);
+  color:var(--cream-text);
+}
+.btn-outline:hover{
+  background:var(--cream-text);
+  color:var(--asphalt);
+}
+
+/* -------------------- Services strip -------------------- */
+.services{
+  padding:56px 0;
+}
+.section-title{
+  font-family:var(--font-display);
+  text-transform:uppercase;
+  font-size:2rem;
+  margin-bottom:8px;
+  letter-spacing:1px;
+  position:relative;
+  display:inline-block;
+  padding-bottom:10px;
+}
+.section-title::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:0;
+  width:64px; height:5px;
+  border-radius:3px;
+  background:repeating-linear-gradient(
+    45deg, var(--asphalt), var(--asphalt) 6px,
+    var(--pump-yellow) 6px, var(--pump-yellow) 12px
+  );
+}
+.section-sub{
+  font-family:var(--font-mono);
+  color:var(--chrome);
+  font-size:0.85rem;
+  margin-bottom:32px;
+}
+
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:22px;
+}
+@media(max-width:640px){ .service-grid{ grid-template-columns:1fr; } }
+
+.service-card{
+  background:linear-gradient(155deg, #fff, var(--paper-2));
+  border-radius:var(--radius);
+  padding:26px;
+  border-left:6px solid var(--signal-red);
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.service-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 28px rgba(0,0,0,.12);
+}
+.service-card.diesel{ border-left-color:var(--diesel-green); }
+
+.service-card h3{
+  font-family:var(--font-display);
+  text-transform:uppercase;
+  font-size:1.3rem;
+  margin-bottom:8px;
+}
+.service-card p{ color:#333; font-size:0.95rem; }
+
+/* -------------------- Bike cards / grid -------------------- */
+.bike-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+  gap:20px;
+  margin-top:10px;
+}
+
+.bike-card{
+  background:#fff;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+  transition:transform .25s ease, box-shadow .25s ease;
+  display:flex;
+  flex-direction:column;
+  border:2px solid transparent;
+}
+.bike-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 34px rgba(0,0,0,.16);
+  border-color:var(--pump-yellow);
+}
+
+.bike-img{
+  aspect-ratio:4/3;
+  width:100%;
+  object-fit:cover;
+  background:var(--paper-2);
+  transition:transform .4s ease;
+}
+.bike-card:hover .bike-img{ transform:scale(1.08); }
+
+.bike-body{
+  padding:16px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.bike-body h3{
+  font-family:var(--font-display);
+  text-transform:uppercase;
+  font-size:1.05rem;
+}
+.bike-specs{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--chrome);
+}
+.bike-price{
+  font-family:var(--font-mono);
+  font-size:1.1rem;
+  color:var(--signal-red);
+  margin-top:4px;
+}
+.bike-body .btn{
+  margin-top:10px;
+  justify-content:center;
+  font-size:0.75rem;
+  padding:10px;
+}
+
+/* -------------------- Fuel LED price display -------------------- */
+.fuel-panel{
+  background:
+    radial-gradient(circle at 50% 0%, rgba(244,180,0,.08), transparent 60%),
+    var(--asphalt);
+  color:var(--cream-text);
+  border-radius:10px;
+  padding:30px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  box-shadow:0 20px 45px rgba(0,0,0,.3);
+}
+@media(max-width:640px){ .fuel-panel{ grid-template-columns:1fr; } }
+
+.fuel-tile{
+  background:var(--asphalt-2);
+  border:2px solid var(--pump-yellow);
+  border-radius:var(--radius);
+  padding:20px;
+  text-align:center;
+  transition:transform .2s ease, box-shadow .2s ease;
+  box-shadow:0 0 22px rgba(244,180,0,.12) inset;
+}
+.fuel-tile:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 32px rgba(244,180,0,.25) inset, 0 10px 20px rgba(0,0,0,.3);
+}
+.fuel-tile.diesel{
+  border-color:var(--diesel-green);
+  box-shadow:0 0 22px rgba(111,207,151,.12) inset;
+}
+.fuel-tile.diesel:hover{
+  box-shadow:0 0 32px rgba(111,207,151,.25) inset, 0 10px 20px rgba(0,0,0,.3);
+}
+
+.fuel-tile .label{
+  font-family:var(--font-mono);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:0.8rem;
+  color:var(--chrome);
+}
+.fuel-tile .price{
+  font-family:var(--font-mono);
+  font-size:2.6rem;
+  color:var(--pump-yellow);
+  margin-top:8px;
+  text-shadow:0 0 12px rgba(244,180,0,.65), 0 0 30px rgba(244,180,0,.35);
+  animation:led-flicker 4s ease-in-out infinite;
+}
+.fuel-tile.diesel .price{
+  color:#6FCF97;
+  text-shadow:0 0 12px rgba(111,207,151,.65), 0 0 30px rgba(111,207,151,.35);
+}
+@keyframes led-flicker{
+  0%, 96%, 100%{ opacity:1; }
+  97%{ opacity:.85; }
+  98%{ opacity:1; }
+}
+
+.fuel-tile .unit{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--chrome);
+}
+
+.fuel-updated{
+  text-align:center;
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--chrome);
+  margin-top:16px;
+}
+
+/* -------------------- Contact / footer -------------------- */
+.contact-block{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin-top:20px;
+}
+@media(max-width:720px){ .contact-block{ grid-template-columns:1fr; } }
+
+.contact-card{
+  background:linear-gradient(155deg, #fff, var(--paper-2));
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.contact-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 28px rgba(0,0,0,.12);
+}
+.contact-card h3{
+  font-family:var(--font-display);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.contact-card p{ margin-bottom:8px; font-size:0.95rem; }
+.contact-card .mono{ font-family:var(--font-mono); font-size:0.9rem; }
+
+.map-frame{
+  width:100%;
+  height:320px;
+  border:0;
+  border-radius:var(--radius);
+  box-shadow:0 10px 28px rgba(0,0,0,.15);
+}
+
+footer{
+  background:var(--asphalt);
+  color:var(--chrome);
+  text-align:center;
+  padding:24px 20px;
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+}
+
+/* -------------------- Scroll reveal (applied automatically by js/script.js) -------------------- */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity .55s ease, transform .55s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* -------------------- Reduced motion -------------------- */
+@media (prefers-reduced-motion: reduce){
+  *{ transition:none !important; scroll-behavior:auto !important; animation:none !important; }
+  .reveal{ opacity:1 !important; transform:none !important; }
+}
+
+/* -------------------- Admin tool -------------------- */
+.admin-wrap{
+  max-width:680px;
+  margin:0 auto;
+  padding:48px 20px 80px;
+}
+
+.login-card{
+  background:var(--asphalt-2);
+  border:2px solid var(--pump-yellow);
+  border-radius:10px;
+  padding:32px;
+  max-width:380px;
+  margin:60px auto;
+  color:var(--cream-text);
+}
+.login-card h2{
+  font-family:var(--font-display);
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.login-card .note{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  color:var(--chrome);
+  margin-bottom:20px;
+  line-height:1.5;
+}
+
+.field{ margin-bottom:14px; }
+.field label{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--chrome);
+  margin-bottom:6px;
+}
+.field input,
+.field select{
+  width:100%;
+  padding:10px 12px;
+  border-radius:var(--radius);
+  border:2px solid var(--chrome);
+  background:#fff;
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:0.95rem;
+}
+.login-card .field input{ background:var(--asphalt); color:var(--cream-text); }
+
+.warning-box{
+  background:rgba(244,180,0,.12);
+  border:2px solid var(--pump-yellow);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  font-size:0.82rem;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+.warning-box strong{ color:var(--signal-red); }
+
+details.settings{
+  background:var(--paper-2);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  margin-bottom:28px;
+}
+details.settings summary{
+  cursor:pointer;
+  font-family:var(--font-mono);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-size:0.85rem;
+}
+details.settings .field{ margin-top:14px; }
+
+.bike-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:#fff;
+  border-radius:var(--radius);
+  padding:10px 14px;
+  margin-bottom:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+.bike-row img{
+  width:56px; height:56px;
+  object-fit:cover;
+  border-radius:4px;
+  background:var(--paper-2);
+}
+.bike-row .info{ flex:1; }
+.bike-row .info .name{ font-weight:600; }
+.bike-row .info .meta{
+  font-family:var(--font-mono);
+  font-size:0.75rem;
+  color:var(--chrome);
+}
+.bike-row .remove-btn{
+  background:var(--signal-red);
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:var(--radius);
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.bike-row .remove-btn:hover{ opacity:.85; }
+
+.status-msg{
+  padding:12px 14px;
+  border-radius:var(--radius);
+  font-family:var(--font-mono);
+  font-size:0.8rem;
+  margin:14px 0;
+  display:none;
+}
+.status-msg.show{ display:block; }
+.status-msg.info{ background:#EAF2FF; color:#1F4D7A; }
+.status-msg.success{ background:#E7F8EE; color:#1F4D3A; }
+.status-msg.error{ background:#FCE9EC; color:var(--signal-red); }
+
+.spinner{
+  display:inline-block;
+  width:14px; height:14px;
+  border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff;
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+  margin-right:6px;
+  vertical-align:-2px;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* -------------------- Focus visibility -------------------- */
+a:focus-visible, button:focus-visible{
+  outline:3px solid var(--pump-yellow);
+  outline-offset:2px;
+}

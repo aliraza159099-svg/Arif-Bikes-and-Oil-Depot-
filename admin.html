@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Admin — Arif Bikes and Oil Depu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      Arif Bikes <br>&amp; Oil Depu
+      <small>Admin Panel</small>
+    </a>
+  </div>
+</header>
+<div class="hazard"></div>
+
+<!-- ============== LOGIN SCREEN ============== -->
+<div id="login-screen" class="admin-wrap">
+  <div class="login-card">
+    <h2>Admin Login</h2>
+    <p class="note">
+      This screen only keeps casual visitors out — it is <strong>not</strong> real
+      security (this is a plain website file, anyone could view its code).
+      The part that actually protects your bike list is the GitHub token you'll
+      enter on the next screen, which only you have. See ADMIN_GUIDE.md for details.
+    </p>
+    <div class="field">
+      <label for="login-user">Username</label>
+      <input id="login-user" type="text" autocomplete="username" />
+    </div>
+    <div class="field">
+      <label for="login-pass">Password</label>
+      <input id="login-pass" type="password" autocomplete="current-password" />
+    </div>
+    <button class="btn btn-primary" id="login-btn" style="width:100%; justify-content:center;">Enter</button>
+    <p id="login-error" class="status-msg error" style="margin-top:14px;"></p>
+  </div>
+</div>
+
+<!-- ============== MAIN ADMIN PANEL (hidden until login) ============== -->
+<div id="admin-panel" class="admin-wrap" style="display:none;">
+
+  <div class="warning-box">
+    <strong>Before you start:</strong> you need a GitHub Personal Access Token
+    with write access to this repository. Full instructions are in
+    <code>ADMIN_GUIDE.md</code>. Never share this token or paste it anywhere except here.
+  </div>
+
+  <details class="settings" open>
+    <summary>⚙️ GitHub Settings (set this up once)</summary>
+    <div class="field">
+      <label for="gh-owner">GitHub Username</label>
+      <input id="gh-owner" type="text" placeholder="e.g. arifraza123" />
+    </div>
+    <div class="field">
+      <label for="gh-repo">Repository Name</label>
+      <input id="gh-repo" type="text" placeholder="e.g. arif-bikes-oil-depot" value="arif-bikes-oil-depot" />
+    </div>
+    <div class="field">
+      <label for="gh-branch">Branch</label>
+      <input id="gh-branch" type="text" placeholder="main" value="main" />
+    </div>
+    <div class="field">
+      <label for="gh-token">GitHub Token (paste each visit — see ADMIN_GUIDE.md)</label>
+      <input id="gh-token" type="password" placeholder="ghp_..." />
+    </div>
+    <div class="field" style="display:flex; align-items:center; gap:8px;">
+      <input id="gh-remember" type="checkbox" style="width:auto;" />
+      <label for="gh-remember" style="margin:0; text-transform:none; letter-spacing:0;">
+        Remember my username/repo/branch on this device (not the token)
+      </label>
+    </div>
+    <button class="btn btn-outline" id="save-settings-btn" style="border-color:var(--asphalt); color:var(--asphalt);">Save Settings</button>
+  </details>
+
+  <h2 class="section-title">Current Bikes</h2>
+  <p id="list-status" class="status-msg info"></p>
+  <div id="bike-list"></div>
+  <button class="btn btn-outline" id="refresh-btn" style="border-color:var(--asphalt); color:var(--asphalt); margin-top:6px;">🔄 Refresh List</button>
+
+  <h2 class="section-title" style="margin-top:44px;">Add a New Bike</h2>
+  <div class="field">
+    <label for="new-name">Bike Name</label>
+    <input id="new-name" type="text" placeholder="e.g. Honda CD 70" />
+  </div>
+  <div class="field">
+    <label for="new-cc">Engine (cc)</label>
+    <input id="new-cc" type="text" placeholder="e.g. 70cc" />
+  </div>
+  <div class="field">
+    <label for="new-price">Price</label>
+    <input id="new-price" type="text" placeholder="e.g. Rs. 1,35,000" />
+  </div>
+  <div class="field">
+    <label for="new-image">Photo</label>
+    <input id="new-image" type="file" accept="image/*" />
+  </div>
+  <button class="btn btn-primary" id="add-btn">➕ Add Bike</button>
+  <p id="add-status" class="status-msg"></p>
+
+</div>
+
+<footer>
+  Arif Bikes and Oil Depu — Admin Panel &copy; <span id="year"></span>
+</footer>
+
+<script src="script.js"></script>
+<script src="admin.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

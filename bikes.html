@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bikes — Arif Bikes and Oil Depu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      Arif Bikes <br>&amp; Oil Depu
+      <small>Alburhan Chowk · Balghar Sooq</small>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">MENU</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="bikes.html">Bikes</a>
+      <a href="fuel.html">Fuel</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<div class="hazard"></div>
+
+<section class="services">
+  <div class="wrap">
+    <h2 class="section-title">Bikes In Stock</h2>
+    <p class="section-sub">TAP "INQUIRE" TO ASK ABOUT PRICE, AVAILABILITY OR A TEST RIDE</p>
+    <div class="bike-grid" id="bike-grid">
+      <!-- filled automatically by bikes-data.js -->
+    </div>
+  </div>
+</section>
+
+<footer>
+  Arif Bikes and Oil Depu — Alburhan Chowk, Balghar Sooq &copy; <span id="year"></span>
+</footer>
+
+<script src="script.js"></script>
+<script src="bikes-data.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

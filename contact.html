@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Arif Bikes and Oil Depu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      Arif Bikes <br>&amp; Oil Depu
+      <small>Alburhan Chowk · Balghar Sooq</small>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">MENU</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="bikes.html">Bikes</a>
+      <a href="fuel.html">Fuel</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+<div class="hazard"></div>
+
+<section class="services">
+  <div class="wrap">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-sub">CALL, WHATSAPP, OR STOP BY</p>
+
+    <div class="contact-block">
+      <div class="contact-card">
+        <h3>Contact</h3>
+        <p class="mono">📞 0344 5596219</p>
+        <div class="cta-row" style="margin-top:14px;">
+          <a class="btn btn-primary" href="tel:+923445596219">Call Now</a>
+          <a class="btn btn-whatsapp" target="_blank" href="https://wa.me/923445596219">WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Address</h3>
+        <p>Arif Bikes and Oil Depu<br>Alburhan Chowk, Balghar Sooq</p>
+        <p class="mono" style="margin-top:10px;">Open 7:00 AM – 10:00 PM, daily</p>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <iframe
+        class="map-frame"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Alburhan%20Chowk%20Balghar%20Sooq&output=embed">
+      </iframe>
+      <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--chrome); margin-top:8px;">
+        Map may need adjusting — search the exact shop location on Google Maps, click "Share", copy the embed link, and paste it into the iframe src above.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Arif Bikes and Oil Depu — Alburhan Chowk, Balghar Sooq &copy; <span id="year"></span>
+</footer>
+
+<script src="script.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

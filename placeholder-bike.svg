@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#E4D9C4"/>
+  <g stroke="#1B1B1B" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="110" cy="215" r="45"/>
+    <circle cx="290" cy="215" r="45"/>
+    <path d="M110 215 L170 140 L230 140 L290 215"/>
+    <path d="M170 140 L150 100 L190 100"/>
+    <path d="M230 140 L245 170 L290 215"/>
+    <line x1="150" y1="100" x2="130" y2="100"/>
+  </g>
+  <text x="200" y="270" font-family="monospace" font-size="14" fill="#8A94A6" text-anchor="middle">PHOTO COMING SOON</text>
+</svg>
