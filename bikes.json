@@ -22,5 +22,11 @@
     "cc": "70cc",
     "price": "135000",
     "image": "honda-1784021169623.png"
+  },
+  {
+    "name": "Honda 2025 Model",
+    "cc": "125",
+    "price": "215000",
+    "image": "honda-2025-model-1784021962384.jpg"
   }
 ]
