@@ -288,4 +288,4 @@ async function removeBike(index) {
   } catch (err) {
     showListStatus(`Something went wrong: ${err.message}`, "error");
   }
-}
+     }
