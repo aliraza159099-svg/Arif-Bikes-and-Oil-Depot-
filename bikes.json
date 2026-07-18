@@ -16,5 +16,11 @@
     "cc": "125 CC",
     "price": "165000",
     "image": "honda-2022-1784037696569.jpg"
+  },
+  {
+    "name": "Honda 2023 Model",
+    "cc": "125 CC",
+    "price": "185000",
+    "image": "honda-2023-model-1784390552188.jpg"
   }
 ]
